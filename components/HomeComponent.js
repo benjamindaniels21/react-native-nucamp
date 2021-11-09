@@ -41,11 +41,11 @@ class Home extends Component {
         />
         <RenderItem
           item={
-            this.state.campsites.filter((promotion) => promotion.featured)[0]
+            this.state.promotions.filter((promotion) => promotion.featured)[0]
           }
         />
         <RenderItem
-          item={this.state.campsites.filter((partner) => partner.featured)[0]}
+          item={this.state.partners.filter((partner) => partner.featured)[0]}
         />
       </ScrollView>
     );
