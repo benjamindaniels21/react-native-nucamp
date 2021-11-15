@@ -89,8 +89,7 @@ class CampsiteInfo extends Component {
           favorite={this.state.favorite}
           markFavorite={() => this.markFavorite()}
         />
-        ;
-        <RenderComments comments={comments} />;
+        <RenderComments comments={comments} />
       </ScrollView>
     );
   }
