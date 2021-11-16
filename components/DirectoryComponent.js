@@ -24,7 +24,7 @@ class Directory extends Component {
           caption={item.description}
           featured
           onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
-          imageSrc={{ url: baseUrl + item.image }}
+          imageSrc={{ uri: baseUrl + item.image }}
         />
       );
     };

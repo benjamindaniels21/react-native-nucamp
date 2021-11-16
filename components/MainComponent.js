@@ -5,18 +5,11 @@ import About from "./AboutComponent";
 import Contact from "./ContactComponent";
 import CampsiteInfo from "./CampsiteInfoComponent";
 import Constants from "expo-constants";
-import {
-  View,
-  Platform,
-  StyleSheet,
-  Text,
-  ScrollView,
-  Image,
-} from "react-native";
+import { View, Platform, StyleSheet, Text, ScrollView } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
-import { Icon } from "react-native-elements";
+import { Icon, Image } from "react-native-elements";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import {
