@@ -8,10 +8,11 @@ import {
   Button,
   StyleSheet,
 } from "react-native";
-import { Card, Icon } from "react-native-elements";
+import { Card, Icon, Input } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postFavorite } from "../redux/ActionCreators";
+import { Rating } from "react-native-elements";
 
 const mapStateToProps = (state) => {
   return {
@@ -93,11 +94,28 @@ class CampsiteInfo extends Component {
 
     this.state = {
       showModal: false,
+      rating: 5,
+      author: "",
+      text: "",
     };
   }
 
   toggleModal() {
     this.setState({ showModal: !this.state.showModal });
+  }
+
+  handleComment(campsiteId) {
+    console.log.JSON.stringify(this.state);
+    this.toggleModal();
+  }
+
+  resetForm() {
+    this.setState({
+      showModal: false,
+      rating: 5,
+      author: "",
+      text: "",
+    });
   }
 
   markFavorite(campsiteId) {
@@ -132,6 +150,17 @@ class CampsiteInfo extends Component {
           onRequestClose={() => this.toggleModal()}
         >
           <View style={styles.modal}>
+            <Modal>
+              <Rating
+                showRating
+                startingValue={this.state.rating}
+                imageSize={40}
+                onFinishRating={(rating) => this.setState({ rating: rating })}
+                style={{ paddingVertical: 10 }}
+              ></Rating>
+              <Input></Input>
+              <Input></Input>
+            </Modal>
             <View style={{ margin: 10 }}>
               <Button
                 onPress={() => {
