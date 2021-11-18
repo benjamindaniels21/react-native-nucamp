@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Modal,
+  Button,
+  StyleSheet,
+} from "react-native";
 import { Card, Icon } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
@@ -51,18 +59,28 @@ function RenderCampsite(props) {
         image={{ uri: baseUrl + campsite.image }}
       >
         <Text style={{ margin: 10 }}>{campsite.description}</Text>
-        <Icon
-          name={props.favorite ? "heart" : "heart-o"}
-          type="font-awesome"
-          color="#f50"
-          raised
-          reverse
-          onPress={() =>
-            props.favorite
-              ? console.log("Already set as a favorite")
-              : props.markFavorite()
-          }
-        />
+        <View>
+          <Icon
+            name={props.favorite ? "heart" : "heart-o"}
+            type="font-awesome"
+            color="#f50"
+            raised
+            reverse
+            onPress={() =>
+              props.favorite
+                ? console.log("Already set as a favorite")
+                : props.markFavorite()
+            }
+          />
+          <Icon
+            name={"pencil"}
+            type="font-awesome"
+            color="#5637DD"
+            raised
+            reverse
+            onPress={() => props.showModal()}
+          />
+        </View>
       </Card>
     );
   }
@@ -70,6 +88,18 @@ function RenderCampsite(props) {
 }
 
 class CampsiteInfo extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+    };
+  }
+
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   markFavorite(campsiteId) {
     this.props.postFavorite(campsiteId);
   }
