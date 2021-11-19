@@ -30,7 +30,13 @@ function RenderComments({ comments }) {
   const renderCommentItem = ({ item }) => {
     return (
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 14 }}>{item.text}</Text>
+        <Text>{item.text}</Text>
+        <Rating
+          imageSize={10}
+          style={{ alignItems: "flex-start", paddingVertical: "5%" }}
+          startingValue={item.rating}
+          readonly="true"
+        ></Rating>
         <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
         <Text
           style={{ fontSize: 12 }}
@@ -150,21 +156,43 @@ class CampsiteInfo extends Component {
           onRequestClose={() => this.toggleModal()}
         >
           <View style={styles.modal}>
-            <Modal>
-              <Rating
-                showRating
-                startingValue={this.state.rating}
-                imageSize={40}
-                onFinishRating={(rating) => this.setState({ rating: rating })}
-                style={{ paddingVertical: 10 }}
-              ></Rating>
-              <Input></Input>
-              <Input></Input>
-            </Modal>
+            <Rating
+              showRating
+              readonly="true"
+              startingValue={this.state.rating}
+              imageSize={40}
+              onFinishRating={(rating) => this.setState({ rating: rating })}
+              style={{ paddingVertical: 10 }}
+            ></Rating>
+            <Input
+              placeholder="Author"
+              leftIcon={{ type: "font-awesome", name: "user-o" }}
+              leftIconContainerStyle={{ paddingRight: 10 }}
+              onChangeText={(author) => this.setState({ author: author })}
+              value={this.state.author}
+            />
+            <Input
+              placeholder="Comment"
+              leftIcon={{ type: "font-awesome", name: "comment-o" }}
+              leftIconContainerStyle={{ paddingRight: 10 }}
+              onChangeText={(text) => this.setState({ text: text })}
+              value={this.state.comment}
+            />
             <View style={{ margin: 10 }}>
               <Button
                 onPress={() => {
-                  this.toggleModal();
+                  this.handleComment();
+                  this.resetForm();
+                }}
+                color="#5637DD"
+                title="Submit"
+              />
+            </View>
+            <View style={{ margin: 10 }}>
+              <Button
+                onPress={() => {
+                  this.handleComment();
+                  this.resetForm();
                 }}
                 color="#808080"
                 title="Cancel"
