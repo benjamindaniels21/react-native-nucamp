@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postFavorite } from "../redux/ActionCreators";
 import { Rating } from "react-native-elements";
+import { postComment } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
   return {
@@ -24,6 +25,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   postFavorite: (campsiteId) => postFavorite(campsiteId),
+  postComment: (campsiteId, rating, author, text) =>
+    postComment(campsiteId, rating, author, text),
 };
 
 function RenderComments({ comments }) {
@@ -111,7 +114,9 @@ class CampsiteInfo extends Component {
   }
 
   handleComment(campsiteId) {
-    console.log.JSON.stringify(this.state);
+    //I'm not sure if I need "this."
+    postComment(campsiteId, rating, author, text);
+    // console.log.JSON.stringify(this.state);
     this.toggleModal();
   }
 

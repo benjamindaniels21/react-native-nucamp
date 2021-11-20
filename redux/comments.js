@@ -8,6 +8,10 @@ export const comments = (state = { errMess: null, comments: [] }, action) => {
     case ActionTypes.COMMENTS_FAILED:
       return { ...state, errMess: action.payload };
 
+    //Is this what I do for task 3?
+    case ActionTypes.ADD_COMMENT:
+      return { ...state, errMess: null, comment: action.payload };
+
     default:
       return state;
   }
