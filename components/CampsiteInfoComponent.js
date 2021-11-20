@@ -38,9 +38,8 @@ function RenderComments({ comments }) {
           imageSize={10}
           style={{ alignItems: "flex-start", paddingVertical: "5%" }}
           startingValue={item.rating}
-          readonly="true"
         ></Rating>
-        <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
+        <Text style={{ fontSize: 12 }}>{item.rating}</Text>
         <Text
           style={{ fontSize: 12 }}
         >{`-- ${item.author}, ${item.date}`}</Text>
@@ -115,7 +114,12 @@ class CampsiteInfo extends Component {
 
   handleComment(campsiteId) {
     //I'm not sure if I need "this."
-    postComment(campsiteId, rating, author, text);
+    this.props.postComment(
+      campsiteId,
+      this.state.author,
+      this.state.text,
+      this.state.rating
+    );
     // console.log.JSON.stringify(this.state);
     this.toggleModal();
   }
@@ -163,7 +167,7 @@ class CampsiteInfo extends Component {
           <View style={styles.modal}>
             <Rating
               showRating
-              readonly="true"
+              // readonly="true"
               startingValue={this.state.rating}
               imageSize={40}
               onFinishRating={(rating) => this.setState({ rating: rating })}
@@ -181,12 +185,12 @@ class CampsiteInfo extends Component {
               leftIcon={{ type: "font-awesome", name: "comment-o" }}
               leftIconContainerStyle={{ paddingRight: 10 }}
               onChangeText={(text) => this.setState({ text: text })}
-              value={this.state.comment}
+              value={this.state.text}
             />
             <View style={{ margin: 10 }}>
               <Button
                 onPress={() => {
-                  this.handleComment();
+                  this.handleComment(campsiteId);
                   this.resetForm();
                 }}
                 color="#5637DD"

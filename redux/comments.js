@@ -8,9 +8,15 @@ export const comments = (state = { errMess: null, comments: [] }, action) => {
     case ActionTypes.COMMENTS_FAILED:
       return { ...state, errMess: action.payload };
 
-    //Is this what I do for task 3?
+    //Is this what I do for task 3 Do I change "comments" to "comment"? What about the id?
     case ActionTypes.ADD_COMMENT:
-      return { ...state, errMess: null, comment: action.payload };
+      const comment = action.payload;
+      comment.id = state.comments.length;
+      return {
+        ...state,
+        errMess: null,
+        comments: state.comments.concat(comment),
+      };
 
     default:
       return state;
