@@ -113,7 +113,6 @@ class CampsiteInfo extends Component {
   }
 
   handleComment(campsiteId) {
-    //I'm not sure if I need "this."
     this.props.postComment(
       campsiteId,
       this.state.author,
